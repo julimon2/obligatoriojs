@@ -3,6 +3,9 @@ let censados = new Array();
 let departamentos = new Array("Montevideo","San José","Canelones","Maldonado","Rocha","Colonia","Flores","Florida","Lavalleja","Rio Negro","Soriano","Cerro Largo","Treinta y Tres","Durazno","Tacuarembó","Rivera","Salto","Paysandú","Artigas",)
 
 function preCargarTestCensados() {
+
+
+    
     let censado1 = new Censado();
     censado1.nombre = "Melanie";
     censado1.apellido = "Grostein";
