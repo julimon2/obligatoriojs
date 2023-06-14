@@ -129,7 +129,9 @@ class Sistema {
         return logIn;
     }
 
-
+    logout() {
+      this.usuarioLogueado = null;
+    }
 
     obtenerUsuarioCensista(pNombreUsuario) {
         let censista = null;

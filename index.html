@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- Pantalla de login -->
+  <div id="divLogin">
+    <button id="mostrarInvitado">Mostrar invitado</button>
+    <h1>Log in</h1>
+    <label >Ingrese nombre de usuario</label>
+    <input type="text" id="txtNombreUsuarioLogIn">
+    <br>
+    <label >Ingrese contraseña</label>
+    <input type="text" id="txtContraseñaLogIn">
+    <br>
+    <input type="button" id="btnLogIn" value="Ingresar">
+    <br>
+    <input type="button" id="Registrar" value="Registrarse"/>
+    <p id="pMostrarLogInCensista"></p>
+  </div>
+
+  <!-- Pantalla de registro censista -->
+  <div id="divFormRegistro">
+    <h1>Quiero registrarme</h1>
+    <label >Ingrese nombre</label>
+    <input type="text" id="txtNombreCensista">
+    <br>
+    <label >Ingrese un nombre de usuario</label>
+    <input type="text" id="txtNombreDeUsuario">
+    <br>
+    <label >Ingrese una contraseña</label>
+    <input type="text" id="txtContraseña">
+    <br>
+    <ul>
+      <li>Tiene que contener al menos 5 caracteres</li>
+      <li>Tiene que tener al menos 1 número</li>
+      <li>Tiene que contener al menos 1 mayúscula</li>
+      <li>Tiene que contener al menos 1 minúscula</li>
+    </ul>
+    <input type="button" id="btnRegistrarCensista" value="Registrarme">
+    <br>
+  </div>
+
+  <p id="pMostrarRegistroCensista"></p>
+
+  <!-- Pantalla de sesion de Censista -->
+  <div id="pantallaCensista">
+    <div id="personasAvalidar">
+        <h2>Personas pendientes de validar:</h2>
+        <br>
+        <input type="button" id="btnPendientesValidar" value="Mostrar">
+        <br>
+        <div id="personasAvalidarInterno"></div>
+    </div>
+
+    <div id="campoCedulaCensista">
+      <label >Ingrese cedula Censista</label>
+      <input type="text" id="txtCedulaBuscarCensista">
+      <br>
+      <input type="button" id="btnBuscarCedulaCensista" value="Buscar">
+      <br>
+      <p id="pMostrarCedulaCensista"></p>
+    </div>
+  </div>
+
+  <!-- Pantalla de ingreso de invitado -->
+  <div id="pantallaIngreseCedula">
+    <label> ingrese cedula </label>
+    <input trype="text" id="txtCedulaBuscar">
+    <button id="btnBuscarCedula">Buscar</button>
+  </div>
+
+  <!-- Pantalla de ingreso de datos -->
+  <div id="pantallaFormularioCenso">
+    <h1>Complete formulario</h1>
+    <label >Ingrese nombre:</label>
+    <input type="text" id="txtNombreCensado">
+    <br>
+    <label >Ingrese apellido:</label>
+    <input type="text" id="txtApellidoCensado">
+    <br>
+    <label >Ingrese edad</label>
+    <input type="text" id="txtEdadCensado">
+    <br>
+    <label >Ingrese cédula</label>
+    <input type="text" id="txtCedulaCensado">
+    <br>
+    <select name="departamentos" id="selDepartamentosCenso"></select>
+    <br>
+    <select name="ocupacion" id="selOcupaciones">
+      <option value="Seleccione">Seleccione ocupación</option>
+      <option value="dependiente">dependiente</option>
+      <option value="independiente" >independiente</option>
+      <option value="estudiante">estudiante</option>
+      <option value="no trabaja">no trabaja</option>
+    </select>
+    <br>
+    <div id="divBtnCensista"></div>
+    <div id="divBtnCensistaValidar"></div>
+    <div id="divBtnCensado"></div>
+    <p id="pMostrarFormulario"></p>
+    <p id="pMostrarCedula"></p>
+  </div>
+
+  <button id="Salir">Salir</button>
+
+  <script src="clasesObligatorioV1.js"></script>
+  <script src="sistemaObligatorioV1.js"></script>
+  <script src="uiObligatorioV1.js"></script>
+</body>
+</html>

@@ -1,30 +1,18 @@
 function eventos() {
-    document.querySelector("#btnRegistrarCensista").addEventListener("click", registrarCensista);
-    document.querySelector("#btnLogIn").addEventListener("click",logIn);
-    document.querySelector("#btnPreFormCenso").addEventListener("click",ocultarBotonInvitado);
-    document.querySelector("#btnBuscarCedula").addEventListener("click",validarCedula);
-    document.querySelector("#btnBuscarCedulaCensista").addEventListener("click",validarCedulaCensista);
-    document.querySelector("#mostrarInvitado").addEventListener("click",buscarInvitado);
-
-    //document.querySelector("#btnPendientesValidar").addEventListener("click",listadoPersonasPendientesXvalidar);
-    /*document.querySelector("#btnEjercicio123").addEventListener("click", ejercicio1Tabla2);
-    document.querySelector("#btnEjercicio2").addEventListener("click", ejercicio2Guardar);
-    document.querySelector("#btnEjercicio22").addEventListener("click", ejercicio2Tabla1);
-    document.querySelector("#btnEjercicio24").addEventListener("click", ejercicio2buscar);
-    document.querySelector("#btnEjercicio4").addEventListener("click", ejercicio4Guardar);
-    document.querySelector("#btnEjercicio41").addEventListener("click", ejercicio4Tabla1);
-    document.querySelector("#btnEjercicio42").addEventListener("click", ejercicio4mostrar);
-    document.querySelector("#btnEjercicio5").addEventListener("click", ejercicio5Guardar);
-    document.querySelector("#btnEjercicio52").addEventListener("click", ejercicio5test);
-    document.querySelector("#btnMostrar").addEventListener("click", mostrarVentasUI);
-    document.querySelector("#btnTestMostrarTotalVentas").addEventListener("click", testMostrarTotalVentasUI);
-    document.querySelector("#btnMostrarTablaVentasXtipo").addEventListener("click", mostrarTablaVentasXtipoUI);*/
+  document.querySelector("#btnRegistrarCensista").addEventListener("click", registrarCensista);
+  document.querySelector("#btnLogIn").addEventListener("click",logIn);
+  document.querySelector("#btnBuscarCedula").addEventListener("click",validarCedula);
+  document.querySelector("#btnBuscarCedulaCensista").addEventListener("click",validarCedulaCensista);
+  document.querySelector("#mostrarInvitado").addEventListener("click",buscarInvitado);
+  document.querySelector("#Salir").addEventListener("click", Salir);
+  document.querySelector("#Registrar").addEventListener("click", irARegistro);
 }
-eventos()
+eventos();
 
-ocultarDiv("divFormularioCenso");
-ocultarDiv("campoCedulaCensista");
-
+function Salir(){
+  miSistema.logout();
+  NavegarEntrePantallas("divLogin");
+}
 
 function cargarComboDepartamentos() {
     let lasOpciones = `<option value="Seleccione"> Seleccione departamento</option>`;
@@ -34,7 +22,6 @@ function cargarComboDepartamentos() {
     }
     document.querySelector("#selDepartamentosCenso").innerHTML = lasOpciones;
 }
-
 cargarComboDepartamentos()
 
 function registrarCensista() {
@@ -49,10 +36,7 @@ function registrarCensista() {
 
                 miSistema.guardarCensista(nombre,nombreUsuario,contraseña)
                 mensaje = "Se registró correctamente, ingrese sesión"; 
-                ocultarDiv("divFormRegistro") 
-                ocultarDiv("btnPreFormCenso")
-                mostrarDiv("divLogin"); // no es necesario
-                
+                NavegarEntrePantallas("pantallaCensista");
             } else {
                 mensaje = "La contraseña no cumple con los requisitos"
             }          
@@ -65,75 +49,7 @@ function registrarCensista() {
     document.querySelector("#pMostrarRegistroCensista").innerHTML = mensaje;
 }
 
-function logIn() {
-    let mensaje = "";
-    let nombreUsuario = document.querySelector("#txtNombreUsuarioLogIn").value;
-    let contraseña = document.querySelector("#txtContraseñaLogIn").value;
-    if (validarIngresoAlgo(nombreUsuario) && validarIngresoAlgo(contraseña)) {
-        if (miSistema.existeNombreUsuario(nombreUsuario)) {
-            if (miSistema.login(nombreUsuario,contraseña)) { //tengo que hacer que si son el mismo usuario en mayusucla me lea la contraseña igual
-            mensaje = `Inició sesión correctamente`;
-            //acá se tienen que mostrar las cosas, osea que pueda hacer click en el menú y aparezca la info
-            mostrarDiv("campoCedulaCensista"); 
-            //botonFormularioCensista();
-            //document.querySelector("#btnFormularioCensista").addEventListener("click",guardarDatosCensadoXcensista);
-        } else {
-            mensaje = `contraseña incorrecta`;
-        }
-        } else {
-            mensaje = `El usuario no existe`;
-        }
-        
-        
-       
-    } else {
-        mensaje = `Debe completar todos los campos`;
-    }
-    document.querySelector("#pMostrarLogInCensista").innerHTML = mensaje;
-    
-}
-
-function guardarDatosCensadoXcensista() {
-    let mensaje = "";
-    let nombre = document.querySelector("#txtNombreCensado").value;
-    let apellido = document.querySelector("#txtApellidoCensado").value;
-    let edad = document.querySelector("#txtEdadCensado").value;
-    let cedula = document.querySelector("#txtCedulaCensado").value;
-    let departamento = document.querySelector("#selDepartamentosCenso").value;
-    let ocupacion = document.querySelector("#selOcupaciones").value;
-    if (validarIngresoAlgo(nombre) && validarIngresoAlgo(apellido) && validarIngresoAlgo(edad) && validarIngresoAlgo(cedula)) {
-        if (departamento !== "Seleccione" && ocupacion !== "Seleccione") {
-            if (!isNaN(edad)) {
-                let edadNro = Number(edad);
-                if (edadNro >= 0 && edadNro <= 130) {
-                    //me falta sacarle todos los guiones y cosas a la cédula - ESTO FALTA
-                    //me falta lo del digito verificador - LO HIZO JULI
-                    //me falta una función de existeCédula - ANTES DE GUARDAR HAY QUE VERIFICAR QUE NO EXISTA CEDULA YA HICE UNA FUNCION DE ESO
-                    //después de validar todo hay que guardar:
-                    //Para llamar a la funcion de abajo es importante pasarle la varieble cedula sin guiones ni puntos ni espacio para que se guarde así
-                    miSistema.guardarCensadoXcensista(nombre, apellido, edadNro, cedula, departamento, ocupacion)
-                    ocultarDiv("divFormRegistro"); //debería quedar solo formulario log in vacío con el menú
-                    mensaje = "Sus datos fueron guardados correctamente";
-
-                } else {
-                    mensaje = "La edad tiene que ser entre 0 y 130"
-                }
-
-            } else {
-                mensaje = "Debe ingresar un nro";
-            }
-
-        } else {
-            mensaje= "Debe seleccionar una opción";
-        }
-        
-    } else {
-        mensaje = `Debe completar todos los campos`;
-    }
-    document.querySelector("#pMostrarFormulario").innerHTML = mensaje;
-}
-
-function guardarDatosCensadoXcensado() {
+function guardarDatosCensado() {
     let mensaje = "";
     let nombre = document.querySelector("#txtNombreCensado").value;
     let apellido = document.querySelector("#txtApellidoCensado").value;
@@ -150,17 +66,19 @@ function guardarDatosCensadoXcensado() {
                     //me falta lo del digito verificador
                     //me falta una función de existeCédula
                     //después de validar todo hay que guardar:
-                    miSistema.guardarCensadoXcensado(nombre, apellido, edadNro, cedula, departamento, ocupacion)
+                    if (miSistema.usuarioLogueado != null) {
+                      miSistema.guardarCensadoXcensista(nombre, apellido, edadNro, cedula, departamento, ocupacion);
+                    } else {
+                      miSistema.guardarCensadoXcensado(nombre, apellido, edadNro, cedula, departamento, ocupacion);
+                    }
                     ocultarDiv("divFormRegistro"); //debería quedar solo formulario log in vacío con el menú
                     let censado = miSistema.buscarCensadoXcedula(cedula);
-                    let censadoIdNum = Number(censado.censistaId)
-                    let censista = miSistema.buscarCensistaXid(censadoIdNum)
+                    let censadoIdNum = Number(censado.censistaId);
+                    let censista = miSistema.buscarCensistaXid(censadoIdNum);
                     mensaje = "Sus datos fueron guardados correctamente y lo va a visitar " + censista.nombre ;
-
                 } else {
                     mensaje = "La edad tiene que ser entre 0 y 130"
                 }
-
             } else {
                 mensaje = "Debe ingresar un nro";
             }
@@ -191,7 +109,7 @@ function validarCedulaCensista() {
                 console.log(buscarCedula);
                 if (buscarCedula !== null) {
                     if (buscarCedula.validado !== true) {
-                        mostrarDiv("divFormularioCenso");
+                        pantallaFormularioCenso("pantallaFormularioCenso");
                         document.getElementById("txtNombreCensado").value = buscarCedula.nombre;
                         console.log("txt nombre censado con valor " + buscarCedula.nombre);
                         console.log(document.getElementById("txtNombreCensado").value)
@@ -204,18 +122,14 @@ function validarCedulaCensista() {
                         document.getElementById("selOcupaciones").value = buscarCedula.ocupacion;
                         botonValidarDatos();
                         document.querySelector("#btnValidarDatos").addEventListener("click",validarInfoCensado)
-
-
-                       
-
                     } else {
                         mensaje = "Esta persona ya fue censada y validada";
                     }
                 } else {
                     mensaje = "Complete los datos del censado"
-                    mostrarDiv("divFormularioCenso");
+                    pantallaFormularioCenso("pantallaFormularioCenso");
                     botonFormularioCensista();
-                    document.querySelector("#btnFormularioCensista").addEventListener("click",guardarDatosCensadoXcensista);
+                    document.querySelector("#btnFormularioCensista").addEventListener("click",guardarDatosCensado);
 
                 }           
 
@@ -249,7 +163,7 @@ function validarCedula() {
                 let buscarCedula = miSistema.buscarCensadoXcedula(cedulaNro);
                 if (buscarCedula !== null) {
                     if (buscarCedula.validado !== true) {
-                        mostrarDiv("divFormularioCenso");
+                        NavegarEntrePantallas("pantallaFormularioCenso");
                         document.getElementById("txtNombreCensado").value = buscarCedula.nombre;
                         document.getElementById("txtApellidoCensado").value = buscarCedula.apellido;
                         document.getElementById("txtEdadCensado").value = buscarCedula.edad;
@@ -260,17 +174,15 @@ function validarCedula() {
                         document.getElementById("selOcupaciones").value = buscarCedula.ocupacion;
                         botonEditarFormularioCensado();
                         document.querySelector("#btnEditarFormularioCensado").addEventListener("click",editarInfoCensado);
-
                         //Falta botón de eliminar info con la función
-
                     } else {
                         mensaje = "Esta persona ya fue censada y validada";
                     }
                 } else {
                     mensaje = "Complete sus datos"
-                    mostrarDiv("divFormularioCenso");
+                    NavegarEntrePantallas("pantallaFormularioCenso");
                     botonFormularioCensado();
-                    document.querySelector("#btnFormularioCensado").addEventListener("click",guardarDatosCensadoXcensado);
+                    document.querySelector("#btnFormularioCensado").addEventListener("click",guardarDatosCensado);
 
                 }           
 
@@ -416,6 +328,7 @@ function editarInfoCensado() {
     //} else {
         //mensaje = `Debe completar todos los campos`;
     //}
+    console.log(mensaje)
     document.querySelector("#pMostrarFormulario").innerHTML = mensaje;
 }
 
@@ -433,12 +346,7 @@ function listadoPersonasPendientesXvalidar() {
         mensaje = `NO hay nadie logueado.`;
         document.querySelector("#personasAvalidarInterno").innerHTML = mensaje;
     }
-    
-
-     
-
 }
-
 
 let ciCensado;
 
@@ -447,7 +355,7 @@ function clickeasteUnaFila() {
     ciCensado = this.getAttribute("censadoElegido");
     let censado = miSistema.buscarCensadoXcedula(Number(ciCensado));
 
-    mostrarDiv("divFormularioCenso");
+    NavegarEntrePantallas("pantallaFormularioCenso");
     ocultarDiv("divBtnCensista");
     document.getElementById("txtNombreCensado").value = censado.nombre;
     document.getElementById("txtApellidoCensado").value = censado.apellido;
@@ -460,8 +368,6 @@ function clickeasteUnaFila() {
     botonValidarDatos();
     document.querySelector("#btnValidarDatos").addEventListener("click",validarDatosXcensista)
 
-
-
 }
 
 function validarDatosXcensista() {
@@ -470,19 +376,6 @@ function validarDatosXcensista() {
     let mensaje = "Se validó el censado";
     document.querySelector("#pMostrarFormulario").innerHTML = mensaje;
 }
-
-
-function ocultarBotonInvitado() {
-    ocultarDiv("menuNavegador");
-    ocultarDiv("divLogin");
-    ocultarDiv("divFormRegistro");
-    mostrarDiv("divFormularioCenso");
-    mostrarBoton();
-
-
-}
-
-
 
 function botonFormularioCensista() {
     let boton = `<input type="button" id="btnFormularioCensista" value="Guardar datos"/><br>`;
@@ -504,9 +397,6 @@ function botonEditarFormularioCensado() {
     document.querySelector("#divBtnCensado").innerHTML = boton;
 }
 
-
-
-
 function mostrarBoton() {
     if (miSistema.usuarioLogueado !== null) {
         botonFormularioCensista();
@@ -517,145 +407,17 @@ function mostrarBoton() {
     
 }
 
-
-
-
-
-function mostrarDiv(pDiv) {
-    document.querySelector(`#${pDiv}`).style.display = "block";
-}
-
 function ocultarDiv(pDiv) {
     document.querySelector(`#${pDiv}`).style.display = "none";
-
 }
-
-
-function ejercicio1Tabla() {
-    let mensaje = miSistema.obtenerTablaPersonas();
-    document.querySelector("#pMostrar1").innerHTML = mensaje;
-}
-
-function ejercicio1Tabla2() {
-    let mensaje = miSistema.obtenerTablaPersonas18();
-    document.querySelector("#pMostrar1").innerHTML = mensaje;
-}
-
-function ejercicio2Guardar() {
-    let mensaje = "";
-    let nombre = document.querySelector("#txtTexto2").value;
-    let año = document.querySelector("#txtTexto22").value;
-    let genero = document.querySelector("#generoPelicula").value;
-    let cantidadVotantes = document.querySelector("#txtTexto23").value;
-    let totalPuntos = document.querySelector("#txtTexto24").value;
-    if (validarIngresoAlgo(nombre) && validarIngresoAlgo(año) && validarIngresoAlgo(genero) && validarIngresoAlgo(cantidadVotantes) && validarIngresoAlgo(totalPuntos)) {
-        if (validarNroPositivo(año) && validarNroPositivo(cantidadVotantes)&& validarNroPositivo(totalPuntos)) {
-            let añoNro = Number(año);
-            let cantidadVotNro = Number(cantidadVotantes);
-            let totalPuntosNro = Number(totalPuntos);
-            if (!miSistema.existe(nombre)) {
-                miSistema.guardarPelicula(nombre,añoNro,genero,cantidadVotNro,totalPuntosNro);
-
-               mensaje = `se guardó la pelicula`;
-            } else {
-                mensaje = `la pelicula existe`
-            /**/}
-
-            
-        } else {
-            mensaje = `debe ingresar un nro en año.`;
-        }
-    } else {
-        mensaje = `ingrese cantidad y selecione tipo`;
-    }
-    document.querySelector("#pMostrar2").innerHTML = mensaje;
-}
-
-function ejercicio2Tabla1() {
-    let mensaje = miSistema.obtenerTablaPromedio();
-    document.querySelector("#pMostrar2").innerHTML = mensaje;
-}
-
-function ejercicio2buscar() {
-    let mensaje = "";
-    let nombre = document.querySelector("#txtTexto25").value;
-    if (validarIngresoAlgo(nombre)) {
-        if (miSistema.existe(nombre)) {
-            mensaje = miSistema.mostrarPelicula(nombre);
-        } else {
-            mensaje = "el objeto no existe"
-        }
-    
-    } else {
-        mensaje = `debe ingresar algo`;
-    }
-    document.querySelector("#pMostrar2").innerHTML = mensaje;
-}
-
-function ejercicio4Tabla1() {
-    let mensaje = miSistema.obtenerTablaVentas();
-    document.querySelector("#pMostrar4").innerHTML = mensaje;
-
-}
-
-function ejercicio4mostrar() {
-    let mensaje = "";
-    let modelo = document.querySelector("#txtTexto43").value;
-    if (validarIngresoAlgo(modelo)) {
-         
-        mensaje = `La cantidad vendida del modelo: ${modelo} es ${miSistema.obtenerCantidadesXModelo(modelo)} `
-
-
-    } else {
-        mensaje = `complete los campos`;
-    }
-    document.querySelector("#pMostrar4").innerHTML = mensaje;
-}
-
-ocultarDiv("prueba2");
-
-
-
-
-
-
-
 
 function buscarInvitado() {
     console.log("mostrar invi")
-    NavegarEntrePantallas("IngreseCedula")
+    NavegarEntrePantallas("pantallaIngreseCedula")
 }
 function mostrarInvitado() {
     console.log("mostrar invi")
-    NavegarEntrePantallas("pantallaInvitado")
-}
-function registrarCensista() {
-    let mensaje = "";
-    let nombre = document.querySelector("#txtNombreCensista").value;
-    let nombreUsuario = document.querySelector("#txtNombreDeUsuario").value;
-    let contraseña = document.querySelector("#txtContraseña").value;
-    if (validarIngresoAlgo(nombre) && validarIngresoAlgo(nombreUsuario) && validarIngresoAlgo(contraseña)) {
-        if (!miSistema.existeNombreUsuario(nombreUsuario)) {
-            if (miSistema.validarContraseña(contraseña)) {
-
-                miSistema.guardarCensista(nombre,nombreUsuario,contraseña); //agregar idúnico
-                
-
-                mensaje = "Se registró correctamente"; //se puede eliminar
-                ocultarDiv("divFormRegistro") //falta ver qué hacemos después de cargarlo
-                mostrarDiv("divLogin");// eliminar form registro y mostrar form log in, dejar siempre arriba el menú
-                
-
-            } else {
-                mensaje = "La contraseña no cumple con los requisitos"
-            }          
-        } else {
-            mensaje = `El usuario ya existe.`;
-        }
-    } else {
-        mensaje = `Debe completar todos los campos`;
-    }
-    document.querySelector("#pMostrarRegistroCensista").innerHTML = mensaje;
+    NavegarEntrePantallas("pantallaFormularioCenso")
 }
 
 function logIn() {
@@ -665,11 +427,7 @@ function logIn() {
     if (validarIngresoAlgo(nombreUsuario) && validarIngresoAlgo(contraseña)) {
         if (miSistema.login(nombreUsuario,contraseña)) {
             mensaje = `Inició sesión correctamente`;
-            NavegarEntrePantallas("pantallaCensista")
-            document.querySelector("#Salir").addEventListener("click",function(){
-                miSistema.logout();
-                NavegarEntrePantallas("divLogin")
-            })
+            NavegarEntrePantallas("pantallaCensista");
             //acá se tienen que mostrar las cosas, osea que pueda hacer click en el menú y aparezca la info
         } else {
             mensaje = `Usuario o contraseña incorrecta`;
@@ -716,128 +474,33 @@ function guardarDatosCensado() {
     document.querySelector("#pMostrarFormulario").innerHTML = mensaje;
 }
 
-
-function cargarComboDepartamentos() {
-    let lasOpciones = `<option value="Seleccione"> Seleccione departamento</option>`;
-    for (let i = 0; i < departamentos.length; i++) {
-        let departamentoX = departamentos[i]; 
-        lasOpciones += `<option value="${departamentoX}"> ${departamentoX} </option>`;
-    }
-    document.querySelector("#selDepartamentosCenso").innerHTML = lasOpciones;
-}
-//cargarComboDepartamentos()
-
-function mostrarDiv(pDiv) {
-    document.querySelector(`#${pDiv}`).style.display = "block";
-}
-
-function ocultarDiv(pDiv) {
-    //document.querySelector(`#${pDiv}`).style.display = "none";
-
-}
-
-
-
-function ejercicio1Tabla() {
-    let mensaje = miSistema.obtenerTablaPersonas();
-    document.querySelector("#pMostrar1").innerHTML = mensaje;
-}
-
-function ejercicio1Tabla2() {
-    let mensaje = miSistema.obtenerTablaPersonas18();
-    document.querySelector("#pMostrar1").innerHTML = mensaje;
-}
-
-function cargarComboGeneros() {
-    let lasOpciones = `<option value=""> Seleccione Tipo </option>`;
-    for (let i = 0; i < generos.length; i++) {
-        let generoX = generos[i]; //es un objeto de tipo "tipo"
-        //los combos y otros elementos se cargar en su value con el indentificador único.
-        /*if(i === 0){
-
-            lasOpciones += `<option value="${tipoX.tipo}" selected> ${tipoX.nombre} - ${tipoX.precio} </option>`;
-        }else{*/
-        lasOpciones += `<option value="${generoX}"> ${generoX} </option>`;
-
-
-        // console.log(lasOpciones);
-    }
-    document.querySelector("#generoPelicula").innerHTML = lasOpciones;
-}
-
-//cargarComboGeneros();
-
-function ejercicio2Guardar() {
-    let mensaje = "";
-    let nombre = document.querySelector("#txtTexto2").value;
-    let año = document.querySelector("#txtTexto22").value;
-    let genero = document.querySelector("#generoPelicula").value;
-    let cantidadVotantes = document.querySelector("#txtTexto23").value;
-    let totalPuntos = document.querySelector("#txtTexto24").value;
-    if (validarIngresoAlgo(nombre) && validarIngresoAlgo(año) && validarIngresoAlgo(genero) && validarIngresoAlgo(cantidadVotantes) && validarIngresoAlgo(totalPuntos)) {
-        if (validarNroPositivo(año) && validarNroPositivo(cantidadVotantes)&& validarNroPositivo(totalPuntos)) {
-            let añoNro = Number(año);
-            let cantidadVotNro = Number(cantidadVotantes);
-            let totalPuntosNro = Number(totalPuntos);
-            if (!miSistema.existe(nombre)) {
-                miSistema.guardarPelicula(nombre,añoNro,genero,cantidadVotNro,totalPuntosNro);
-
-               mensaje = `se guardó la pelicula`;
-            } else {
-                mensaje = `la pelicula existe`
-            /**/}
-
-            
-        } else {
-            mensaje = `debe ingresar un nro en año.`;
-        }
-    } else {
-        mensaje = `ingrese cantidad y selecione tipo`;
-    }
-    document.querySelector("#pMostrar2").innerHTML = mensaje;
-}
-
-function ejercicio2Tabla1() {
-    let mensaje = miSistema.obtenerTablaPromedio();
-    document.querySelector("#pMostrar2").innerHTML = mensaje;
-}
-
-function ejercicio2buscar() {
-    let mensaje = "";
-    let nombre = document.querySelector("#txtTexto25").value;
-    if (validarIngresoAlgo(nombre)) {
-        if (miSistema.existe(nombre)) {
-            mensaje = miSistema.mostrarPelicula(nombre);
-        } else {
-            mensaje = "el objeto no existe"
-        }
-    
-    } else {
-        mensaje = `debe ingresar algo`;
-    }
-    document.querySelector("#pMostrar2").innerHTML = mensaje;
-}
-
 //capturar evento click registrar censista
-document.querySelector("#Registrar").addEventListener("click",function(event){
-    
-    NavegarEntrePantallas("divFormRegistro")
-})
+function irARegistro(event){
+    NavegarEntrePantallas("divFormRegistro");
+}
 
 //la funcion navegar entre pantallas
 function NavegarEntrePantallas(pPantalla){
     console.log(pPantalla);
-    let array=["prueba3","divFormRegistro","divLogin","pantallaCensista","pantallaInvitado","IngreseCedula"]
+    let array=[
+      "divFormRegistro",
+      "divLogin",
+      "pantallaCensista",
+      "pantallaIngreseCedula",
+      "pantallaFormularioCenso"
+    ]
     for (let i=0; i<array.length; i++){
-
         if (array[i]==pPantalla){
             document.querySelector("#"+array[i]).style.display="block";
         }else {
             document.querySelector("#"+array[i]).style.display="none";
         }
     }
-
-
+    if (pPantalla != "divLogin"){
+      document.getElementById("Salir").style.display="block";
+    } else {
+      document.getElementById("Salir").style.display="none";
+    }
 }
 NavegarEntrePantallas("divLogin")
 
