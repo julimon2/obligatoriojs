@@ -109,7 +109,7 @@ function validarCedulaCensista() {
                 console.log(buscarCedula);
                 if (buscarCedula !== null) {
                     if (buscarCedula.validado !== true) {
-                        pantallaFormularioCenso("pantallaFormularioCenso");
+                        NavegarEntrePantallas("pantallaFormularioCenso");
                         document.getElementById("txtNombreCensado").value = buscarCedula.nombre;
                         console.log("txt nombre censado con valor " + buscarCedula.nombre);
                         console.log(document.getElementById("txtNombreCensado").value)
@@ -127,7 +127,7 @@ function validarCedulaCensista() {
                     }
                 } else {
                     mensaje = "Complete los datos del censado"
-                    pantallaFormularioCenso("pantallaFormularioCenso");
+                    NavegarEntrePantallas("pantallaFormularioCenso");
                     botonFormularioCensista();
                     document.querySelector("#btnFormularioCensista").addEventListener("click",guardarDatosCensado);
 
