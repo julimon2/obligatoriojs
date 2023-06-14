@@ -6,6 +6,7 @@ function eventos() {
   document.querySelector("#mostrarInvitado").addEventListener("click",buscarInvitado);
   document.querySelector("#Salir").addEventListener("click", Salir);
   document.querySelector("#Registrar").addEventListener("click", irARegistro);
+  document.querySelector("#btnPendientesValidar").addEventListener("click", listadoPersonasPendientesXvalidar);
 }
 eventos();
 
