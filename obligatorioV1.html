@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div id="divPadre"> 
+        <div id="menuNavegador">
+            <ul id="navPrincipal">
+                <li id="liGuitarras" class="misMenus">
+                    <a>Formulario censo</a>
+                </li>
+                <li id="liVentaGuitarra" class="misMenus">
+                    <a>Reasignar censista</a>
+                </li>
+                <li id="liDatos" class="misMenus">
+                    <a>Validar datos pre-cargados</a>
+                </li>
+                <li>
+                    <a>Estadísticas</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="campoCedula">
+            <label >Ingrese cedula</label>
+            <input type="text" id="txtCedulaBuscar">
+            <br>
+            <input type="button" id="btnBuscarCedula" value="Buscar">
+            <br>
+            <p id="pMostrarCedula"></p>
+        </div>
+
+        <div id="campoCedulaCensista">
+            <label >Ingrese cedula CENSISTA</label>
+            <input type="text" id="txtCedulaBuscarCensista">
+            <br>
+            <input type="button" id="btnBuscarCedulaCensista" value="Buscar">
+            <br>
+            <p id="pMostrarCedulaCensista"></p>
+        </div>
+
+        <div id="personasAvalidar">
+            <h2>Personas pendientes de validar:</h2>
+            <br>
+            <input type="button" id="btnPendientesValidar" value="Mostrar">
+            <br>
+            <div id="personasAvalidarInterno"></div>
+        </div>
+
+        <div id="PreFormCenso">
+            <input type="button" id="btnPreFormCenso" value="Quiero pre-completar el censo">
+
+        </div>
+
+        <div id="divLogin">
+            <h1>Log in</h1>
+            <label >Ingrese nombre de usuario</label>
+            <input type="text" id="txtNombreUsuarioLogIn">
+            <br>
+            <label >Ingrese contraseña</label>
+            <input type="text" id="txtContraseñaLogIn">
+            <br>
+            <input type="button" id="btnLogIn" value="Ingresar">
+            <br>
+       
+            <p id="pMostrarLogInCensista"></p>
+        </div>
+
+        <div id="divFormRegistro">
+            <h1>Quiero registrarme</h1>
+            <label >Ingrese nombre</label>
+            <input type="text" id="txtNombreCensista">
+            <br>
+            <label >Ingrese un nombre de usuario</label>
+            <input type="text" id="txtNombreDeUsuario">
+            <br>
+            <label >Ingrese una contraseña</label>
+            <input type="text" id="txtContraseña">
+            <br>
+            <ul>
+                 <li>Tiene que contener al menos 5 caracteres</li>
+                 <li>Tiene que tener al menos 1 número</li>
+                 <li>Tiene que contener al menos 1 mayúscula</li>
+                 <li>Tiene que contener al menos 1 minúscula</li>
+
+            </ul>
+            <input type="button" id="btnRegistrarCensista" value="Registrarme">
+            <br>
+         </div>
+         <p id="pMostrarRegistroCensista"></p>
+    
+
+
+        <div id="divFormularioCenso">
+            <h1>Complete formulario</h1>
+            <label >Ingrese nombre:</label>
+            <input type="text" id="txtNombreCensado">
+            <br>
+            <label >Ingrese apellido:</label>
+            <input type="text" id="txtApellidoCensado">
+            <br>
+            <label >Ingrese edad</label>
+            <input type="text" id="txtEdadCensado">
+            <br>
+            <label >Ingrese cédula</label>
+            <input type="text" id="txtCedulaCensado">
+            <br>
+            <select name="departamentos" id="selDepartamentosCenso"></select>
+            <br>
+            <select name="ocupacion" id="selOcupaciones">
+                <option value="Seleccione">Seleccione ocupación</option>
+                <option value="dependiente">dependiente</option>
+                <option value="independiente" >independiente</option>
+                <option value="estudiante">estudiante</option>
+                <option value="no trabaja">no trabaja</option>
+            </select>
+            <br>
+            <div id="divBtnCensista"></div>
+            <div id="divBtnCensistaValidar"></div>
+            <div id="divBtnCensado"></div>
+       
+            <p id="pMostrarFormulario"></p>
+            </div>
+
+
+            <div id="divEstadisticasParaCensistaPadre">
+
+                <div id="divEstadisticasCantidadCensados">
+                <label >Mostrar cantidad actual de censados</label>
+                <br>
+                <input type="button" id="btnEstadisticasCantidadCensados" value="Mostrar">
+                <br>
+                <p id="pMostrarEstadisticasCantidadCensados"></p>
+            </div>
+
+                
+            </div>
+
+            <div id="divEstadisticasParaCensadoPadre">
+
+
+
+            </div>
+
+            <div id="divReasignarCensista">
+
+
+            </div>
+
+            
+            
+            
+
+            
+
+    </div>
+    
+    
+    
+
+ 
+
+
+
+   
+
+    
+
+
+
+
+
+
+
+    <script src="clasesObligatorioV1.js"></script>
+    <script src="sistemaObligatorioV1.js"></script>
+    <script src="uiObligatorioV1.js"></script>
+    
+
+
+</body>
+</html>

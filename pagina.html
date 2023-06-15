@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilo.css" />
+    <title>GUITARRA Ver con guitarra</title>
+</head>
+
+<body>
+    <div id="contenedor">
+        <div id="cabezal" class="clearfix">
+            <img id="logo" src="https://p1.develotion.com/2023_03/logo.jpg" alt="logo">
+            <ul id="navPrincipal">
+                <li id="liGuitarras" class="misMenus">
+                    <a>Guitarras</a>
+                </li>
+                <li id="liVentaGuitarra" class="misMenus">
+                    <a>Venta Guitarra </a>
+                </li>
+                <li id="liDatos" class="misMenus">
+                    <a>Datos</a>
+                </li>
+                <li>
+                    <a>Sección 4</a>
+                </li>
+
+            </ul>
+            <div id="aux">
+                <a>Menú alt. 1</a> | <a>Menú alt. 2</a>
+            </div><!-- FIN AUX -->
+        </div><!-- FIN CABEZAL -->
+        <div id="contenido">
+            <div id="divLogin">
+
+                <h3>BIENVENIDO A TU MUSICA</h3>
+                <label for="txtNomUsu">Usuario:</label>
+                <input type="text" id="txtNomUsu" value="user1"><br>
+                <label for="txtContrasena">Contraseña:</label>
+                <input type="password" id="txtContrasena" value="Clave1"><br>
+                <input type="button" value="Iniciar" id="btnLogin"><br>
+
+                <div id="divMostrarLogin"></div>
+                <div id="divMostrarTest"></div>
+
+            </div>
+            <div id="divCerrarSesion"><input type="button" value="Cerrar Sesión" id="btnCerrarSesion"><br></div>
+            <hr>
+
+            <hr>
+            <div id="divInterior" class="interior">
+                <h3>BIENVENIDO <span id="hUsuLogueado"></span></h3>
+                <h5>ENTR'O AL SISTEMA</h5>
+
+                <div id="divGuitarras" class="divsVendedor">
+                    <h3>Administraci'on Guitarras</h3>
+                    <!-- //dinámico desde js. -->
+
+                </div>
+
+                <div id="divVentaGuitarra" class="divsVendedor">
+                    <hr>
+                    <h3>Administraci'on Ventas</h3>
+                    <!--No lo necesito porque est'a logueado  <label>Seleccione Vendedor:</label><select id="selVendedores"></select><br>-->
+                    <label>Seleccione tipo:</label><select id="selTipoGuitarras"></select><br>
+                    <label>Cantidad:</label><input type="text" id="txtCantidad"><br>
+                    <input type="button" value="Vender" id="btnVender">
+
+                    <div id="divMostrarVenta" ></div>
+                </div>
+                
+                <div id="divDatos" class="divsVendedor" >
+                    <hr>
+                    <h3>Datos Varios</h3>
+                    <input type="button" value="Mostrar Todas las Ventas" id="btnMostrar"><br>
+                    <input type="button" value="Test mostrar Total ventas para tipo" id="btnTestMostrarTotalVentas">
+                    <input type="button" value="Mostrar Guitarras" id="btnMostrarGuitarras"><br>
+
+                    <input type="button" value="Mostrar Ventas por Tipo" id="btnMostrarTablaVentasXtipo"><BR><BR>
+                    <input type="button" value="Mostrar Ventas por Vendedor" id="btnMostrarTablaVentasXvendedor"><BR><BR>
+                        <div id="divMostrarDatosVenta"></div>
+                </div>
+
+            </div>
+            <!--FIN ELEMENTOS-->
+        </div><!-- FIN CONTENIDO -->
+        <div id="pie">
+            <a href="https://www.ort.edu.uy">Footer</a>
+        </div><!-- FIN PIE -->
+    </div><!-- FIN CONTENEDOR -->
+    <script src="js/clases.js"></script>
+    <script src="js/sistema.js"></script>
+    <script src="js/codigo.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+
+</html>
