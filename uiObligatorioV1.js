@@ -88,6 +88,11 @@ function logIn() {
     }
     document.querySelector("#pMostrarLogInCensista").innerHTML = mensaje;
     
+    //ejemplo timeout
+    //setTimeout(function(){
+        //document.querySelector("#pMostrarLogInCensista").innerHTML = "";
+    //},10000)
+    
 }
 
 function guardarDatosCensadoXcensista() { //acá guarda el censista los datos
@@ -427,6 +432,35 @@ function estadisticasCantidadCensados() {
 }
 
 
+//capturar evento click registrar censista
+document.querySelector("#Registrar").addEventListener("click",function(event){
+    
+    NavegarEntrePantallas("divFormRegistro")
+})
+
+//la funcion navegar entre pantallas
+function NavegarEntrePantallas(pPantalla){
+    console.log(pPantalla);
+    let array=["prueba3","divFormRegistro","divLogin","pantallaCensista","pantallaInvitado","IngreseCedula"]
+    for (let i=0; i<array.length; i++){
+
+        if (array[i]==pPantalla){
+            document.querySelector("#"+array[i]).style.display="block";
+        }else {
+            document.querySelector("#"+array[i]).style.display="none";
+        }
+    }
+
+
+}
+NavegarEntrePantallas("divLogin")
+
+
+
+
+
+
+
 
 /*function listadoPersonasPendientesXvalidar() {
     let mensaje = "";
@@ -539,4 +573,40 @@ function ocultarDiv(pDiv) {
 
 }
 
+function NavegarEntrePantallas(pPantalla){
+    console.log(pPantalla);
+    let array=["divFormRegistro"]
+    for (let i=0; i<array.length; i++){
 
+        if (array[i]==pPantalla){
+            document.querySelector("#"+array[i]).style.display="block";
+        }else {
+            document.querySelector("#"+array[i]).style.display="none";
+        }
+    }
+
+    
+    if (pPantalla == "") {
+        if(miSistema.usuarioLogueado) {
+            //aca hace algo si esta logueado
+        } else {
+            //aca no
+        }
+        //pasa esto
+    } else {
+        //pasa otra cosa
+    }
+    if (miSistema.usuarioLogueado) {
+        //document.querySelector("#Salir").style.display="block";
+    } else {
+        //document.querySelector("#Salir").style.display="none";
+    }
+    if (miSistema.usuarioLogueado !== null) {
+        botonFormularioCensista();
+    }
+    if (miSistema.usuarioLogueado === null) {
+        botonFormularioCensado();
+    }
+
+
+}

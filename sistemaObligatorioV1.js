@@ -84,6 +84,7 @@ class Sistema {
 
         }
 
+
         if (pContraseña.length >= 5 && contadorMayuscula > 0 && contadorMinuscula > 0 && contadorNumero > 0) {
 
              cumple = true;
@@ -95,6 +96,9 @@ class Sistema {
 
     
     }
+
+
+
 
     login(pNombreUsuario, pContraseña) {
         let logIn = false;
@@ -373,7 +377,37 @@ class Sistema {
     }
 
 
+    EliminarDatosCensado(ci){
 
+        for (let i=0; i< this.censados.length; i++){
+            let censo = this.censados[i];
+            if(censo.cedula == ci){
+                this.censados.splice(i,1)
+            }
+        }
+    }
+    
+        AsignarCensistaACenso (ci, censistaId) {
+            for (let i=0; i< this.censados.length; i++){
+                if(this.censados[i].cedula == ci){
+                    this.censados[i].censistaId = censistaId;
+                    this.censados[i].validado = false;
+                }
+            }
+        }
+    
+    }
+    -
+    
+    function validarIngresoAlgo(pAlgo) {
+        return pAlgo.trim().length > 0;
+    }
+    function validarNroPositivo(pNro) {
+        return !isNaN(pNro) && Number(pNro) >= 0;
+    }
+    
+    
+    
 
 
 
@@ -581,16 +615,6 @@ class Sistema {
 
 
 }*/
-
-}
-
-
-function validarIngresoAlgo(pAlgo) {
-    return pAlgo.trim().length > 0;
-}
-function validarNroPositivo(pNro) {
-    return !isNaN(pNro) && Number(pNro) >= 0;
-}
 
 
 
